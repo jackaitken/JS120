@@ -1,7 +1,7 @@
 const readline = require('readline-sync');
 
 const RPSGame = {
-o  human: createHuman(),
+  human: createHuman(),
   computer: createComputer(),
 
   displayWinner() {
@@ -86,23 +86,6 @@ function createComputer() {
     }
   }
   return Object.assign(playerObject, computerObject);
-}
-
-
-function createMove() {
-  return {
-    // (possible state: type of move (rock, paper, scissors))
-  };
-}
-
-function createRule() {
-  return {
-    // (possible state: unsure if Rules need state)
-  };
-}
-
-function compare(move1, move2) {
-  // to implement
 }
 
 RPSGame.play();
