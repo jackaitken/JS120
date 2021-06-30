@@ -49,23 +49,16 @@ o  human: createHuman(),
   },
 };
 
-
-function createComputer() {
+function createPlayer() {
   return {
     move: null,
-
-    choose() {
-      const choices = ['rock', 'paper', 'scissors'];
-      let randomIndex = Math.floor(Math.random() * choices.length);
-      this.move = choices[randomIndex];
-    }
   }
 }
 
 function createHuman() {
-  return {
-    move: null,
+  let playerObject = createPlayer();
 
+  let humanObject = {
     choose() {
       const choices = ['rock', 'paper', 'scissors'];
       let choice,
@@ -76,11 +69,25 @@ function createHuman() {
         if (choices.includes(choice)) break;
         console.log("Sorry. That's an invalid choice");
       }
-  
       this.move = choice;
     },
   }
+  return Object.assign(playerObject, humanObject);
 }
+
+function createComputer() {
+  let playerObject = createPlayer();
+
+  let computerObject = {
+    choose() {
+      const choices = ['rock', 'paper', 'scissors'];
+      let randomIndex = Math.floor(Math.random() * choices.length);
+      this.move = choices[randomIndex];
+    }
+  }
+  return Object.assign(playerObject, computerObject);
+}
+
 
 function createMove() {
   return {
