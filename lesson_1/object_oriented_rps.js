@@ -1,24 +1,55 @@
+const readline = require('readline-sync');
+
 const RPSGame = {
-  human: createPlayer(),
-  computer: createPlayer(),
+  human: createPlayer('human'),
+  computer: createPlayer('computer'),
+
+  displayWelcomeMessage() {
+    console.log('Welcome to Rock, Paper, Scissors');
+  },
+
+  displayGoodbyeMessage() {
+    console.log('Thanks for playing Rock, Paper, Scissors. Goodbye!');
+  },
 
   play() {
-    displayWelcomeMessage();
+    this.displayWelcomeMessage();
     this.human.choose();
     this.computer.choose();
     displayWinner();
-    displayGoodbyeMessage();
+    this.displayGoodbyeMessage();
   },
 };
 
-function createPlayer() {
+function createPlayer(playerType) {
   return {
     // player's name?
     // player's current move
+    playerType,
+    move: null,
 
     choose() {
-      // pass
+      if (this.isHuman()) {
+        const choices = ['rock', 'paper', 'scissors'];
+        let choice;
+
+        while (true) {
+          console.log('Please choose rock, paper, or scissors: ');
+          choice = readline.question();
+          if (choices.includes(choice)) break;
+          console.log("Sorry. That's an invalid choice");
+        }
+
+        this.move = choice;
+      } else {
+        let randomIndex = Math.floor(Math.random() * choices.length);
+        this.move = choices[randomIndex];
+      }
     },
+
+    isHuman() {
+      return this.playerType === 'human';
+    }
   };
 }
 
