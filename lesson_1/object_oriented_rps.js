@@ -3,24 +3,51 @@ const readline = require('readline-sync');
 const RPSGame = {
   human: createHuman(),
   computer: createComputer(),
+  playerScore: 0,
+  computerScore: 0,
 
   displayWinner() {
     let humanMove = this.human.move;
     let computerMove = this.computer.move;
+    console.clear();
     console.log(`You chose ${humanMove}`);
     console.log(`The computer chose ${computerMove}`);
 
     if ((humanMove === 'rock' && computerMove === 'scissors') ||
       (humanMove === 'paper' && computerMove === 'rock') ||
       (humanMove === 'scissors' && computerMove === 'paper')) {
-        console.log('You win!');
+        this.playerScore += 1;
+        console.log('You win that round!');
       } else if ((humanMove === 'rock' && computerMove === 'paper') ||
       (humanMove === 'paper' && computerMove === 'scissors') ||
       (humanMove === 'scissors' && computerMove === 'rock')) {
-        console.log('Computer wins!');
+        this.computerScore += 1;
+        console.log('Computer wins that round');
       } else {
-        console.log("It's a tie");
+        console.log("This round is a tie");
       }
+  },
+
+  displayCurrentScore() {
+    console.log(`Current Score: You: ${this.playerScore}, CPU: ${this.computerScore}`);
+  },
+
+  isWinner() {
+    return this.playerScore === 5 || this.computerScore === 5;
+  },
+
+  determineWinner() {
+    let winner;
+    if (this.playerScore === 5) {
+      winner = 'You are';
+    } else {
+      winner = 'The Computer is';
+    }
+    return this.displayGrandWinner(winner);
+  },
+
+  displayGrandWinner(player) {
+    console.log(`${player} the Grand Winner!`)
   },
 
   displayWelcomeMessage() {
@@ -40,14 +67,24 @@ const RPSGame = {
   play() {
     this.displayWelcomeMessage();
     while (true) {
-      this.human.choose();
-      this.computer.choose();
-      this.displayWinner();
+      console.clear();
+      while (true) {
+        this.human.choose();
+        this.computer.choose();
+        this.displayWinner();
+        this.displayCurrentScore();
+        if (this.isWinner()) {
+          this.determineWinner();
+          break;
+        }
+      }
       if (!this.playAgain()) break;
     }
     this.displayGoodbyeMessage();
   },
 };
+
+// Factory Functions below
 
 function createPlayer() {
   return {
@@ -61,7 +98,7 @@ function createHuman() {
   let humanObject = {
     choose() {
       const choices = ['rock', 'paper', 'scissors'];
-      let choice,
+      let choice;
 
       while (true) {
         console.log('Please choose rock, paper, or scissors: ');
