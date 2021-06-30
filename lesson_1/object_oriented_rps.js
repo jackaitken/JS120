@@ -67,6 +67,7 @@ function createHuman() {
     move: null,
 
     choose() {
+      const choices = ['rock', 'paper', 'scissors'];
       let choice,
 
       while (true) {
