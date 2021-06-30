@@ -1,3 +1,16 @@
+const RPSGame = {
+  human: createPlayer(),
+  computer: createPlayer(),
+
+  play() {
+    displayWelcomeMessage();
+    this.human.choose();
+    this.computer.choose();
+    displayWinner();
+    displayGoodbyeMessage();
+  },
+};
+
 function createPlayer() {
   return {
     // player's name?
