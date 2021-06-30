@@ -6,37 +6,58 @@ const RPSGame = {
   playerScore: 0,
   computerScore: 0,
 
-  displayWinner() {
+  displayMoves() {
+    console.clear();
+    console.log(`You chose ${this.human.move}`);
+    console.log(`The computer chose ${this.computer.move}`);
+  },
+
+  determineGameWinner() {
     let humanMove = this.human.move;
     let computerMove = this.computer.move;
-    console.clear();
-    console.log(`You chose ${humanMove}`);
-    console.log(`The computer chose ${computerMove}`);
-
+    
     if ((humanMove === 'rock' && computerMove === 'scissors') ||
       (humanMove === 'paper' && computerMove === 'rock') ||
       (humanMove === 'scissors' && computerMove === 'paper')) {
-        this.playerScore += 1;
-        console.log('You win that round!');
+        return 'player'
       } else if ((humanMove === 'rock' && computerMove === 'paper') ||
       (humanMove === 'paper' && computerMove === 'scissors') ||
       (humanMove === 'scissors' && computerMove === 'rock')) {
-        this.computerScore += 1;
-        console.log('Computer wins that round');
+        return 'cpu';
       } else {
-        console.log("This round is a tie");
+        return 'tie';
       }
+  },
+
+  displayGameWinner() {
+    let result = this.determineGameWinner();
+    if (result === 'player') {
+      console.log('You won that round!');
+    } else if (result === 'cpu') {
+      console.log('The computer won that round');
+    } else {
+      console.log('That round was a tie');
+    }
+  },
+
+  updateScore() {
+    let result = this.determineGameWinner();
+    if (result === 'player') {
+      this.playerScore += 1;
+    } else if (result === 'cpu') {
+      this.computerScore += 1;
+    }
   },
 
   displayCurrentScore() {
     console.log(`Current Score: You: ${this.playerScore}, CPU: ${this.computerScore}`);
   },
 
-  isWinner() {
+  isGrandWinner() {
     return this.playerScore === 5 || this.computerScore === 5;
   },
 
-  determineWinner() {
+  determineGrandWinner() {
     let winner;
     if (this.playerScore === 5) {
       winner = 'You are';
@@ -67,18 +88,23 @@ const RPSGame = {
   play() {
     this.displayWelcomeMessage();
     while (true) {
-      console.clear();
       while (true) {
         this.human.choose();
         this.computer.choose();
-        this.displayWinner();
+        this.displayMoves();
+        this.displayGameWinner();
+        this.updateScore();
         this.displayCurrentScore();
-        if (this.isWinner()) {
-          this.determineWinner();
+        if (this.isGrandWinner()) {
+          this.determineGrandWinner();
           break;
         }
       }
-      if (!this.playAgain()) break;
+      if (!this.playAgain()) {
+        break;
+      } else {
+        console.clear();
+      };
     }
     this.displayGoodbyeMessage();
   },
