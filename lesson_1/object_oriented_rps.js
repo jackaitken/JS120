@@ -3,8 +3,6 @@ const readline = require('readline-sync');
 const RPSGame = {
   human: createHuman(),
   computer: createComputer(),
-  playerScore: 0,
-  computerScore: 0,
 
   displayMoves() {
     console.clear();
@@ -43,23 +41,25 @@ const RPSGame = {
   updateScore() {
     let result = this.determineGameWinner();
     if (result === 'player') {
-      this.playerScore += 1;
+      this.human.score += 1;
     } else if (result === 'cpu') {
-      this.computerScore += 1;
+      this.computer.score += 1;
     }
   },
 
   displayCurrentScore() {
-    console.log(`Current Score: You: ${this.playerScore}, CPU: ${this.computerScore}`);
+    let cpuScore = this.computer.score;
+    let humanScore = this.human.score;
+    console.log(`Current Score: You: ${humanScore}, CPU: ${cpuScore}`);
   },
 
   isGrandWinner() {
-    return this.playerScore === 5 || this.computerScore === 5;
+    return this.human.score === 5 || this.computer.score === 5;
   },
 
   determineGrandWinner() {
     let winner;
-    if (this.playerScore === 5) {
+    if (this.human.score === 5) {
       winner = 'You are';
     } else {
       winner = 'The Computer is';
@@ -73,9 +73,13 @@ const RPSGame = {
 
   displayWelcomeMessage() {
     console.log('Welcome to Rock, Paper, Scissors');
+    console.log('First player to 5 wins will be named Grand Winner!');
+    readline.question('Press enter to begin');
+    console.clear();
   },
 
   displayGoodbyeMessage() {
+    console.clear();
     console.log('Thanks for playing Rock, Paper, Scissors. Goodbye!');
   },
 
@@ -115,12 +119,11 @@ const RPSGame = {
 function createPlayer() {
   return {
     move: null,
+    score: 0,
   }
 }
 
 function createHuman() {
-  let playerObject = createPlayer();
-
   let humanObject = {
     choose() {
       const choices = ['rock', 'paper', 'scissors'];
@@ -135,12 +138,10 @@ function createHuman() {
       this.move = choice;
     },
   }
-  return Object.assign(playerObject, humanObject);
+  return Object.assign(createPlayer(), humanObject);
 }
 
 function createComputer() {
-  let playerObject = createPlayer();
-
   let computerObject = {
     choose() {
       const choices = ['rock', 'paper', 'scissors'];
@@ -148,7 +149,7 @@ function createComputer() {
       this.move = choices[randomIndex];
     }
   }
-  return Object.assign(playerObject, computerObject);
+  return Object.assign(createPlayer(), computerObject);
 }
 
 RPSGame.play();
