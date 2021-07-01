@@ -93,6 +93,11 @@ const RPSGame = {
     return answer.toLowerCase()[0] === 'y';
   },
 
+  resetScores() {
+    this.human.score = 0;
+    this.computer.score = 0;
+  },
+
   play() {
     this.displayWelcomeMessage();
     while (true) {
@@ -112,6 +117,7 @@ const RPSGame = {
         break;
       } else {
         console.clear();
+        this.resetScores();
       };
     }
     this.displayGoodbyeMessage();
@@ -125,6 +131,7 @@ function createPlayer() {
     move: null,
     score: 0,
     choices: ['rock', 'paper', 'scissors', 'spock', 'lizard'],
+    pastMoves: [],
   }
 }
 
@@ -141,6 +148,7 @@ function createHuman() {
         console.log("Sorry. That's an invalid choice");
       }
       this.move = choice;
+      playerObject.pastMoves.push(choice);
     },
   }
   return Object.assign(playerObject, humanObject);
@@ -150,9 +158,9 @@ function createComputer() {
   let playerObject = createPlayer();
   let computerObject = {
     choose() {
-      const choices = ['rock', 'paper', 'scissors', 'lizard', 'spock'];
-      let randomIndex = Math.floor(Math.random() * choices.length);
+      let randomIndex = Math.floor(Math.random() * playerObject.choices.length);
       this.move = playerObject.choices[randomIndex];
+      playerObject.pastMoves.push(this.move);
     }
   }
   return Object.assign(playerObject, computerObject);
