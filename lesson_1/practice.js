@@ -1,8 +1,9 @@
-'use strict';
-
-function func() {
-  console.log(`this refers to ${this}`);
+let foo = {
+  bar: function() {
+    console.log(this);
+  }
 };
 
-func()
-// this refers to undefined
+foo.bar(); // `foo` is the implicit execution context for `bar`
+// { bar: [Function: bar] }
+
