@@ -1,8 +1,8 @@
-let obj1 = {
-  a: 1
+'use strict';
+
+function func() {
+  console.log(`this refers to ${this}`);
 };
 
-let protoboto = Object.getPrototypeOf(obj1);
-debugger;
-
-
+func()
+// this refers to undefined
