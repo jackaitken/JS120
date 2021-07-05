@@ -1,14 +1,13 @@
-let obj = {
-  logNum() {
-    console.log(this.num);
-  }
+let object = {
+  a: 'hello',
+  b: 'world',
+  foo: function() {
+    return this.a + ' ' + this.b;
+  },
 };
 
-let obj1 = {
-  num: 2
-}
+let bar = object.foo;
+bar();                                // "undefined undefined"
 
-obj.logNum.call(obj1); // 2
-// Functionally same as
-obj1.logNum = obj.logNum;
-obj1.logNum(); // 2
+let baz = object.foo.bind(object);
+baz();                                // "hello world"
