@@ -1,9 +1,9 @@
-let foo = {
-  bar: function() {
-    console.log(this);
-  }
+function logNum() {
+  console.log(this.num);
+}
+
+let obj = {
+  num: 42
 };
 
-foo.bar(); // `foo` is the implicit execution context for `bar`
-// { bar: [Function: bar] }
-
+logNum.call(obj); // 42
