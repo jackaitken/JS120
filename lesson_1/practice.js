@@ -1,13 +1,28 @@
-let object = {
-  a: 'hello',
-  b: 'world',
-  foo: function() {
-    return this.a + ' ' + this.b;
-  },
+let greetings = {
+  morning: 'Good morning, ',
+  afternoon: 'Good afternoon, ',
+  evening: 'Good evening, ',
+
+  greeting: function(name) {
+    let currentHour = (new Date()).getHours();
+
+    if (currentHour < 12) {
+      console.log(this.morning + name);
+    } else if (currentHour < 18) {
+      console.log(this.afternoon + name);
+    } else {
+      console.log(this.evening + name);
+    }
+  }
 };
 
-let bar = object.foo;
-bar();                                // "undefined undefined"
+let spanishWords = {
+  morning: 'Buenos dias, ',
+  afternoon: 'Buenas tardes, ',
+  evening: 'Buena noches, '
+};
 
-let baz = object.foo.bind(object);
-baz();                                // "hello world"
+let spanishGreeter = greetings.greeting.bind(spanishWords);
+
+spanishGreeter('Jose');
+spanishGreeter('Juan');
