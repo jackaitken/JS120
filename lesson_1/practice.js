@@ -1,64 +1,39 @@
-const TESgames = {
-  titles: ['Arena', 'Daggerfall', 'Morrowind', 'Oblivion', 'Skyrim'],
-  seriesTitle: 'The Elder Scrolls',
-  listGames: function() {
-    this.titles.forEach(function(title) {
-      console.log(this.seriesTitle + ': ' + title);
-    });
+let foo = {
+  a: 0,
+  incrementA: function() {
+    function increment() {
+      this.a += 1;
+    }
+
+    increment();
   }
 };
 
-TESgames.listGames();
+foo.incrementA();
+foo.incrementA();
+foo.incrementA();
 
 /*
-Will output:
-undefined: Arena
-undefined: Daggerfall
-undefined: Morrowind
-undefined: Oblivion
-undefined: Skyrim
-
-To fix we can do this:
+This doesn't work as expected because the execution context inside of 
+increment is the global object. For it to work as expected we could do this
 */
 
-const TESgames = {
-  titles: ['Arena', 'Daggerfall', 'Morrowind', 'Oblivion', 'Skyrim'],
-  seriesTitle: 'The Elder Scrolls',
-  listGames: function() {
-    let self = this;
-    this.titles.forEach(function(title) {
-      console.log(self.seriesTitle + ': ' + title);
-    });
+let foo = {
+  a: 0,
+  incrementA: function() {
+    let increment = () => {
+      this.a += 1;
+    }
+
+    increment();
   }
 };
 
-TESgames.listGames();
+foo.incrementA(); // 1
+foo.incrementA(); // 2
+foo.incrementA(); // 3
 
-// Or:
-
-const TESgames = {
-  titles: ['Arena', 'Daggerfall', 'Morrowind', 'Oblivion', 'Skyrim'],
-  seriesTitle: 'The Elder Scrolls',
-  listGames: function() {
-    this.titles.forEach(function(title) {
-      console.log(this.seriesTitle + ': ' + title);
-    }, this);
-  }
-};
-
-TESgames.listGames();
-
-// Or
-
-const TESgames = {
-  titles: ['Arena', 'Daggerfall', 'Morrowind', 'Oblivion', 'Skyrim'],
-  seriesTitle: 'The Elder Scrolls',
-  listGames: function() {
-    this.titles.forEach(title => {
-      console.log(this.seriesTitle + ': ' + title);
-    });
-  }
-};
-
-TESgames.listGames();
-
+/*
+Arrow functions inherit their context from the surrounding code.
+The context of incrementA is foo.
+*/
