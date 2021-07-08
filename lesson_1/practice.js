@@ -1,39 +1,18 @@
-let foo = {
-  a: 0,
-  incrementA: function() {
-    function increment() {
-      this.a += 1;
-    }
-
-    increment();
-  }
+const OPERATIONS = {
+  '+': (num1, num2) => num1 + num2,
+  '-': (num1, num2) => num1 - num2,
+  '*': (num1, num2) => num1 * num2,
+  '/': (num1, num2) => num1 / num2,
 };
 
-foo.incrementA();
-foo.incrementA();
-foo.incrementA();
-
-/*
-This doesn't work as expected because the execution context inside of 
-increment is the global object. For it to work as expected we could do this
-*/
-
-let foo = {
-  a: 0,
-  incrementA: function() {
-    let increment = () => {
-      this.a += 1;
-    }
-
-    increment();
-  }
+let getOperation = operation => {
+  debugger;
+  return OPERATIONS[operation];
 };
 
-foo.incrementA(); // 1
-foo.incrementA(); // 2
-foo.incrementA(); // 3
+let compute = function(operation, num1, num2) {
+  debugger;
+  return operation(num1, num2);
+};
 
-/*
-Arrow functions inherit their context from the surrounding code.
-The context of incrementA is foo.
-*/
+compute(getOperation('%'), 9, 4)) === 5;
