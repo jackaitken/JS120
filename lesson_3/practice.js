@@ -12,7 +12,7 @@ function createInvoice(services = {}) {
     },
 
     addPayments: function(servicesArr) {
-      this.payments.push(...servicesArr);
+      servicesArr.forEach(this.addPayment, this);
     },
 
     totalPayment: function() {
