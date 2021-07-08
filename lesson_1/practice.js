@@ -1,18 +1,14 @@
-const OPERATIONS = {
-  '+': (num1, num2) => num1 + num2,
-  '-': (num1, num2) => num1 - num2,
-  '*': (num1, num2) => num1 * num2,
-  '/': (num1, num2) => num1 / num2,
+let cats = {
+  names: [ 'Butterscotch', 'Pudding', 'Fluffy' ],
+  foo() {
+    [1, 2, 3].forEach(function(number) {
+      console.log(`${number}: ${this.names[number - 1]}`);
+    }, this);
+  }
 };
 
-let getOperation = operation => {
-  debugger;
-  return OPERATIONS[operation];
-};
-
-let compute = function(operation, num1, num2) {
-  debugger;
-  return operation(num1, num2);
-};
-
-compute(getOperation('%'), 9, 4)) === 5;
+cats.foo();
+// Expected output:
+// 1: Butterscotch
+// 2: Pudding
+// 3: Fluffy
