@@ -1,17 +1,15 @@
-function Ninja() {
-  this.swung = false;
+function User(first, last) {
+  if (this instanceof User) {
+    this.name = first + ' ' + last;
+  } else {
+    return new User(first, last);
+  }
 }
 
-// Add a swing method to the Ninja prototype which
-// modifies `swung` and returns the calling object
+let name = 'Jane Doe';
+let user1 = new User('John', 'Doe');
+let user2 = User('John', 'Doe');
 
-Ninja.prototype.swing = function() {
-  this.swung = true;
-  return this;
-}
-
-let ninjaA = new Ninja();
-let ninjaB = new Ninja();
-
-console.log(ninjaA.swing().swung);      // logs `true`
-console.log(ninjaB.swing().swung);      // logs `true`
+console.log(name);         // => Jane Doe
+console.log(user1.name);   // => John Doe
+console.log(user2.name);   // => John Doe
