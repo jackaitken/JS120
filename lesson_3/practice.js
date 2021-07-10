@@ -1,22 +1,17 @@
-/*
-Write a constructor function called Circle that
-takes a radius as an argument. You should be able
-to call an area method on any objects created by the
-constructor to get the circle's area. Test your implementation
-with the following code:
-*/
-
-function Circle(radius) {
-  this.radius = radius;
+function Ninja() {
+  this.swung = false;
 }
 
-Circle.prototype.area = function() {
-  return (this.radius ** 2) * Math.PI;
+// Add a swing method to the Ninja prototype which
+// modifies `swung` and returns the calling object
+
+Ninja.prototype.swing = function() {
+  this.swung = true;
+  return this;
 }
 
-let a = new Circle(3);
-let b = new Circle(4);
+let ninjaA = new Ninja();
+let ninjaB = new Ninja();
 
-console.log(a.area().toFixed(2)); // => 28.27
-console.log(b.area().toFixed(2)); // => 50.27
-console.log(a.hasOwnProperty('area')); // => false
+console.log(ninjaA.swing().swung);      // logs `true`
+console.log(ninjaB.swing().swung);      // logs `true`
