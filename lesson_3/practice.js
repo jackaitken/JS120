@@ -1,19 +1,45 @@
-function Dog(name, breed, weight) {
-  this.name = name;
-  this.breed = breed;
-  this.weight = weight;
+/*
+
+let RECTANGLE = {
+  area: function() {
+    return this.width * this.height;
+  },
+  perimeter: function() {
+    return 2 * (this.width + this.height);
+  },
+};
+
+function Rectangle(width, height) {
+  this.width = width;
+  this.height = height;
+  this.area = RECTANGLE.area();
+  this.perimeter = RECTANGLE.perimeter();
 }
 
-Dog.prototype.bark = function() {
-  console.log(this.weight > 20 ? 'Woof!' : 'Yip!');
+let rect1 = new Rectangle(2, 3);
+
+console.log(rect1.area); // NaN
+console.log(rect1.perimeter); // NaN
+
+*/
+
+let RECTANGLE = {
+  area: function() {
+    return this.width * this.height;
+  },
+  perimeter: function() {
+    return 2 * (this.width + this.height);
+  },
+};
+
+function Rectangle(width, height) {
+  this.width = width;
+  this.height = height;
+  this.area = RECTANGLE.area.call(this);
+  this.perimeter = RECTANGLE.perimeter.call(this);
 }
 
-let maxi = new Dog('Maxi', 'German Shepherd', 32);
-let dexter = new Dog('Dexter', 'Rottweiler', 50);
+let rect1 = new Rectangle(2, 3);
 
-dexter.bark = function() {
-  console.log('WOOF!');
-}
-maxi.bark(); // Woof!
-dexter.bark(); // WOOF!
-console.log(Object.getPrototypeOf(dexter).bark());
+console.log(rect1.area);
+console.log(rect1.perimeter);
