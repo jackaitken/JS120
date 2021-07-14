@@ -53,16 +53,9 @@ class Square {
 
 class Board {
   constructor() {
-    this.squares = {
-      1: new Square('X'),
-      2: new Square(),
-      3: new Square(),
-      4: new Square(),
-      5: new Square(),
-      6: new Square('O'),
-      7: new Square(),
-      8: new Square(),
-      9: new Square(),
+    this.squares = {};
+    for (let i = 1; i < 10; i++) {
+      this.squares[String(i)] = new Square();
     }
   }
 
