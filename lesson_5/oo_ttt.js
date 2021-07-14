@@ -87,16 +87,26 @@ class TTTGame {
     while (true) {
       this.board.display();
 
-      this.firstPlayerMoves();
+      this.humanMoves();
       if (this.gameOver()) break;
 
-      this.secondPlayerMoves();
+      this.computerMoves();
       if (this.gameOver()) break;
       break;
     }
 
     this.displayResults();
     this.displayGoodbyeMessage();
+  }
+
+  humanMoves() {
+    // STUB
+    // the first player makes a move
+  }
+
+  computerMoves() {
+    // STUB
+    // the second player makes a move
   }
 
   displayWelcomeMessage() {
@@ -110,16 +120,6 @@ class TTTGame {
   displayResults() {
     // STUB
     // Show the results of the game (win, tie, loss)
-  }
-
-  firstPlayerMoves() {
-    // STUB
-    // the first player makes a move
-  }
-
-  secondPlayerMoves() {
-    // STUB
-    // the second player makes a move
   }
 
   gameOver() {
