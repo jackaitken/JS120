@@ -46,31 +46,31 @@ class Computer extends Player {
 class Board {
   constructor() {
     this.squares = {
-      1: '',
-      2: '',
-      3: '',
-      4: '',
-      5: '',
-      6: '',
-      7: '',
-      8: '',
-      9: '',
+      1: ' ',
+      2: ' ',
+      3: ' ',
+      4: ' ',
+      5: ' ',
+      6: ' ',
+      7: ' ',
+      8: ' ',
+      9: ' ',
     }
   }
 
   display() {
     console.log("");
-    console.log("     |     |");
-    console.log("  O  |     |  O");
-    console.log("     |     |");
-    console.log("-----+-----+-----");
-    console.log("     |     |");
-    console.log("     |  X  |");
-    console.log("     |     |");
-    console.log("-----+-----+-----");
-    console.log("     |     |");
-    console.log("  X  |     |");
-    console.log("     |     |");
+    console.log(`     |     |`);
+    console.log(`  ${this.squares['1']}  |  ${this.squares['2']}  |  ${this.squares['3']}`);
+    console.log(`     |     |`);
+    console.log(`-----+-----+-----`);
+    console.log(`     |     |`);
+    console.log(`  ${this.squares['4']}  |  ${this.squares['5']}  |  ${this.squares['6']}`);
+    console.log(`     |     |`);
+    console.log(`-----+-----+-----`);
+    console.log(`     |     |`);
+    console.log(`  ${this.squares['7']}  |  ${this.squares['8']}  |  ${this.squares['9']}`);
+    console.log(`     |     |`);
     console.log("");
   }
 }
