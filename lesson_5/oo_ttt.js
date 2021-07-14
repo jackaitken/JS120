@@ -1,9 +1,3 @@
-class Board {
-  constructor() {
-    // STUB
-  }
-}
-
 class Square {
   constructor() {
     // STUB
@@ -49,22 +43,55 @@ class Computer extends Player {
   }
 }
 
+class Board {
+  constructor() {
+    this.squares = {
+      1: '',
+      2: '',
+      3: '',
+      4: '',
+      5: '',
+      6: '',
+      7: '',
+      8: '',
+      9: '',
+    }
+  }
+
+  display() {
+    console.log("");
+    console.log("     |     |");
+    console.log("  O  |     |  O");
+    console.log("     |     |");
+    console.log("-----+-----+-----");
+    console.log("     |     |");
+    console.log("     |  X  |");
+    console.log("     |     |");
+    console.log("-----+-----+-----");
+    console.log("     |     |");
+    console.log("  X  |     |");
+    console.log("     |     |");
+    console.log("");
+  }
+}
+
 class TTTGame {
   constructor() {
-    // STUB
+    this.board = new Board();
   }
 
   play() {
     this.displayWelcomeMessage();
 
     while (true) {
-      this.displayBoard();
+      this.board.display();
 
       this.firstPlayerMoves();
       if (this.gameOver()) break;
 
       this.secondPlayerMoves();
       if (this.gameOver()) break;
+      break;
     }
 
     this.displayResults();
@@ -82,11 +109,6 @@ class TTTGame {
   displayResults() {
     // STUB
     // Show the results of the game (win, tie, loss)
-  }
-
-  displayBoard() {
-    // STUB
-    // Display the board and its current state
   }
 
   firstPlayerMoves() {
