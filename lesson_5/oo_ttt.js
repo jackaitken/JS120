@@ -1,9 +1,3 @@
-class Square {
-  constructor() {
-    // STUB
-  }
-}
-
 class Row {
   constructor() {
     // STUB
@@ -43,18 +37,32 @@ class Computer extends Player {
   }
 }
 
+class Square {
+  static UNUSED_SQUARE = ' ';
+  static HUMAN_MARKER = 'X';
+  static COMPUTER_MARKER = 'O';
+
+  constructor(marker = Square.UNUSED_SQUARE) {
+    this.marker = marker
+  }
+
+  toString() {
+    return this.marker;
+  }
+}
+
 class Board {
   constructor() {
     this.squares = {
-      1: ' ',
-      2: ' ',
-      3: ' ',
-      4: ' ',
-      5: ' ',
-      6: ' ',
-      7: ' ',
-      8: ' ',
-      9: ' ',
+      1: new Square('X'),
+      2: new Square(),
+      3: new Square(),
+      4: new Square(),
+      5: new Square(),
+      6: new Square('O'),
+      7: new Square(),
+      8: new Square(),
+      9: new Square(),
     }
   }
 
