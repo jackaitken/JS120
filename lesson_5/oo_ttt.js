@@ -19,7 +19,6 @@ class Player {
 
 class Human extends Player {
   constructor() {
-    debugger;
     super(Square.HUMAN_MARKER);
   }
 }
@@ -67,6 +66,10 @@ class Board {
   unusedSquares() {
     let keys = Object.keys(this.squares);
     return keys.filter(key => this.squares[key].isUnused());
+  }
+
+  boardIsFull() {
+    return this.unusedSquares().length === 0;
   }
 
   display() {
@@ -118,10 +121,7 @@ class TTTGame {
       let prompt = `Choose a square (${validChoices.join(', ')}): `;
       choice = readline.question(prompt);
 
-      let integerValue = Number(choice);
-      if (integerValue <= 10 && integerValue >= 1) {
-        break;
-      }
+      if (validChoices.includes(choice)) break;
 
       console.log("Sorry, that's not a valid choice");
       console.log("");
@@ -130,8 +130,14 @@ class TTTGame {
   }
 
   computerMoves() {
-    let randKey = Math.floor((Math.random() * 9) + 1);
-    this.board.markSquareAt(randKey, this.computer.getMarker());
+    let validChoices = this.board.unusedSquares();
+    let choice;
+
+    do {
+      choice = Math.floor((Math.random() * 9) + 1).toString();
+    } while (!validChoices.includes(choice));
+
+    this.board.markSquareAt(choice, this.computer.getMarker());
   }
 
   displayWelcomeMessage() {
@@ -148,7 +154,11 @@ class TTTGame {
   }
 
   gameOver() {
-    // STUB
+    return this.board.boardIsFull() || this.someoneWon();
+  }
+
+  someoneWon() {
+    // STUB 
     return false;
   }
 }
