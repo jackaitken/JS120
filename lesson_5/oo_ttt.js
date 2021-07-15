@@ -6,12 +6,6 @@ class Row {
   }
 }
 
-class Marker {
-  constructor() {
-    // STUB
-  }
-}
-
 class Player {
   constructor(marker) {
     this.marker = marker
@@ -97,11 +91,12 @@ class TTTGame {
       this.board.display();
 
       this.humanMoves();
+      this.board.display();
       if (this.gameOver()) break;
 
       this.computerMoves();
+      this.board.display();
       if (this.gameOver()) break;
-      break;
     }
 
     this.displayResults();
@@ -126,7 +121,8 @@ class TTTGame {
   }
 
   computerMoves() {
-    console.log('Computer moves');
+    let randKey = Math.floor((Math.random() * 9) + 1);
+    this.board.markSquareAt(randKey, this.computer.getMarker());
   }
 
   displayWelcomeMessage() {
