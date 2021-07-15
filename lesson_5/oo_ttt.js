@@ -1,3 +1,5 @@
+let readline = require('readline-sync');
+
 class Row {
   constructor() {
     // STUB
@@ -11,29 +13,26 @@ class Marker {
 }
 
 class Player {
-  constructor() {
-    // STUB
+  constructor(marker) {
+    this.marker = marker
   }
 
-  mark() {
-    // STUB
-  }
-
-  play() {
-    // STUB
+  getMarker() {
+    return this.marker;
   }
 }
 
 
 class Human extends Player {
   constructor() {
-    // STUB
+    debugger;
+    super(Square.HUMAN_MARKER);
   }
 }
 
 class Computer extends Player {
   constructor() {
-    // STUB
+    super(Square.COMPUTER_MARKER);
   }
 }
 
@@ -44,6 +43,10 @@ class Square {
 
   constructor(marker = Square.UNUSED_SQUARE) {
     this.marker = marker
+  }
+
+  setMarker(marker) {
+    this.marker = marker;
   }
 
   toString() {
@@ -57,6 +60,10 @@ class Board {
     for (let i = 1; i < 10; i++) {
       this.squares[i] = new Square();
     }
+  }
+
+  markSquareAt(key, marker) {
+    this.squares[key].setMarker(marker);
   }
 
   display() {
@@ -79,6 +86,8 @@ class Board {
 class TTTGame {
   constructor() {
     this.board = new Board();
+    this.human = new Human();
+    this.computer = new Computer();
   }
 
   play() {
@@ -100,13 +109,24 @@ class TTTGame {
   }
 
   humanMoves() {
-    // STUB
-    // the first player makes a move
+    let choice;
+
+    while (true) {
+      choice = readline.question('Choose a square between 1 and 9: ');
+
+      let integerValue = Number(choice);
+      if (integerValue <= 10 && integerValue >= 1) {
+        break;
+      }
+
+      console.log("Sorry, that's not a valid choice");
+      console.log("");
+    }
+    this.board.markSquareAt(choice, this.human.getMarker());
   }
 
   computerMoves() {
-    // STUB
-    // the second player makes a move
+    console.log('Computer moves');
   }
 
   displayWelcomeMessage() {
