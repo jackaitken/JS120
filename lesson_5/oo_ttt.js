@@ -46,6 +46,10 @@ class Square {
   toString() {
     return this.marker;
   }
+
+  isUnused() {
+    return this.marker === Square.UNUSED_SQUARE;
+  }
 }
 
 class Board {
@@ -58,6 +62,11 @@ class Board {
 
   markSquareAt(key, marker) {
     this.squares[key].setMarker(marker);
+  }
+
+  unusedSquares() {
+    let keys = Object.keys(this.squares);
+    return keys.filter(key => this.squares[key].isUnused());
   }
 
   display() {
@@ -91,11 +100,9 @@ class TTTGame {
       this.board.display();
 
       this.humanMoves();
-      this.board.display();
       if (this.gameOver()) break;
 
       this.computerMoves();
-      this.board.display();
       if (this.gameOver()) break;
     }
 
@@ -107,7 +114,9 @@ class TTTGame {
     let choice;
 
     while (true) {
-      choice = readline.question('Choose a square between 1 and 9: ');
+      let validChoices = this.board.unusedSquares();
+      let prompt = `Choose a square (${validChoices.join(', ')}): `;
+      choice = readline.question(prompt);
 
       let integerValue = Number(choice);
       if (integerValue <= 10 && integerValue >= 1) {
