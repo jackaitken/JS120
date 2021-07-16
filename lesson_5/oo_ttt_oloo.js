@@ -28,8 +28,8 @@ let Square = {
   HUMAN_MARKER: 'X',
   COMPUTER_MARKER: 'O',
 
-  init(marker) {
-    this.marker = marker || this.UNUSED_SQUARE;
+  init(marker = Square.UNUSED_SQUARE) {
+    this.marker = marker;
     return this;
   },
 
