@@ -1,11 +1,5 @@
 let readline = require('readline-sync');
 
-class Row {
-  constructor() {
-    // STUB
-  }
-}
-
 class Player {
   constructor(marker) {
     this.marker = marker
@@ -15,7 +9,6 @@ class Player {
     return this.marker;
   }
 }
-
 
 class Human extends Player {
   constructor() {
@@ -42,6 +35,10 @@ class Square {
     this.marker = marker;
   }
 
+  getMarker() {
+    return this.marker;
+  }
+
   toString() {
     return this.marker;
   }
@@ -57,6 +54,13 @@ class Board {
     for (let i = 1; i < 10; i++) {
       this.squares[i] = new Square();
     }
+  }
+
+  displayWithClear() {
+    console.clear();
+    console.log('');
+    console.log('');
+    this.display()
   }
 
   markSquareAt(key, marker) {
@@ -87,6 +91,13 @@ class Board {
     console.log(`     |     |`);
     console.log("");
   }
+
+  countMarkersFor(player, keys) {
+    let markers = keys.filter(key => {
+      return this.squares[key].getMarker() === player.getMarker();
+    });
+    return markers.length;
+  }
 }
 
 class TTTGame {
@@ -96,19 +107,32 @@ class TTTGame {
     this.computer = new Computer();
   }
 
+  static POSSIBLE_WINNING_ROWS = [
+    [ "1", "2", "3" ],
+    [ "4", "5", "6" ],
+    [ "7", "8", "9" ],
+    [ "1", "4", "7" ],
+    [ "2", "5", "8" ],
+    [ "3", "6", "9" ],
+    [ "1", "5", "9" ],
+    [ "3", "5", "7" ],   
+  ]
+
   play() {
     this.displayWelcomeMessage();
 
+    this.board.display();
     while (true) {
-      this.board.display();
-
       this.humanMoves();
       if (this.gameOver()) break;
 
       this.computerMoves();
       if (this.gameOver()) break;
+
+      this.board.displayWithClear();
     }
 
+    this.board.displayWithClear();
     this.displayResults();
     this.displayGoodbyeMessage();
   }
@@ -141,16 +165,29 @@ class TTTGame {
   }
 
   displayWelcomeMessage() {
+    console.clear();
     console.log('Welcome to Tic Tac Toe!');
+    console.log('');
   }
 
   displayGoodbyeMessage() {
-    console.log('Thanks for playing Tic Tact Toe! Goodbye!');
+    console.log('Thanks for playing Tic Tac Toe! Goodbye!');
   }
 
   displayResults() {
-    // STUB
-    // Show the results of the game (win, tie, loss)
+    if (this.isWinner(this.human)) {
+      console.log('You won! Congratulations!');
+    } else if (this.isWinner(this.computer)) {
+      console.log(('The computer won'));
+    } else {
+      console.log('The game ended in a tie');
+    }
+  }
+
+  isWinner(player) {
+    return TTTGame.POSSIBLE_WINNING_ROWS.some(row => {
+      return this.board.countMarkersFor(player, row) === 3;
+    });
   }
 
   gameOver() {
@@ -158,8 +195,7 @@ class TTTGame {
   }
 
   someoneWon() {
-    // STUB 
-    return false;
+    return this.isWinner(this.human) || this.isWinner(this.computer);
   }
 }
 
