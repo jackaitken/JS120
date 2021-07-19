@@ -38,3 +38,4 @@ function removeSubstr(str, endIdx) {
 console.log(fewestPalindromicSubstrs('yoboyananayoboy', [])); // [ 'yobananaboy' ]
 console.log(fewestPalindromicSubstrs('racecarannakayak', [])); // [ 'racecar', 'anna', 'kayak' ]
 console.log(fewestPalindromicSubstrs('abc', [])); // ['a', 'b', 'c']
+console.log(fewestPalindromicSubstrs('jajajajajaja', [])); // ['a', 'b', 'c']
