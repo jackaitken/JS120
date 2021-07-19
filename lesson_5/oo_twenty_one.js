@@ -8,6 +8,7 @@ class Card {
 
 class Deck {
   constructor() {
+    this.deck = this.fillDeck();
     //STUB
     // What sort of state does a deck need?
     // 52 Cards?
@@ -15,10 +16,32 @@ class Deck {
     // array, object, something else?
   }
 
-  deal() {
-    //STUB
-    // does the dealer or the deck deal?
+  fillDeck() {
+    let deck = [];
+    let types = [
+      {suit: 'Diamonds'},
+      {suit: 'Hearts'},
+      {suit: 'Clubs'},
+      {suit: 'Spades'}
+    ];
+
+    let cards = [2, 3, 4, 5, 6, 7, 8, 9, 10,
+       'Jack', 'Queen', 'King', 'Ace'];
+
+    for (let i = 0; i < cards.length; i++) {
+      for (let j = 0; j < 4; j++) {
+        deck.push([cards[i], types[j]]);
+      }
+    }
+    return deck;
   }
+
+  deal() {
+    let randIdx = Math.floor(Math.random() * 52);
+    return this.deck[randIdx];
+  }
+
+
 }
 
 class Participant {
@@ -126,3 +149,6 @@ class TwentyOneGame {
 
 let game = new TwentyOneGame();
 game.start();
+
+let deck = new Deck();
+console.log(deck.deal());
