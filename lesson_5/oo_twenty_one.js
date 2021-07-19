@@ -28,14 +28,6 @@ class Participant {
     // Score? Hand? Amount of money available?
     // What else goes here? all the redundant behaviors from Player and Dealer?
   }
-}
-
-class Player extends Participant {
-  constructor() {
-    //STUB
-    // What sort of state does a player need?
-    // Score? Hand? Amount of money available?
-  }
 
   hit() {
     //STUB
@@ -51,6 +43,14 @@ class Player extends Participant {
 
   score() {
     //STUB
+  }
+}
+
+class Player extends Participant {
+  constructor() {
+    //STUB
+    // What sort of state does a player need?
+    // Score? Hand? Amount of money available?
   }
 }
 
@@ -61,22 +61,6 @@ class Dealer extends Participant {
     //STUB
     // What sort of state does a dealer need?
     // Score? Hand? Deck of cards? Bow tie?
-  }
-
-  hit() {
-    //STUB
-  }
-
-  stay() {
-    //STUB
-  }
-
-  isBusted() {
-    //STUB
-  }
-
-  score() {
-    //STUB
   }
 
   hide() {
@@ -128,11 +112,11 @@ class TwentyOneGame {
   }
 
   displayWelcomeMessage() {
-    //STUB
+    console.log('Welcome to Twenty One!');
   }
 
   displayGoodbyeMessage() {
-    //STUB
+    console.log('Thanks for playing Twenty One!');
   }
 
   displayResult() {
