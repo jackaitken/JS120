@@ -40,8 +40,6 @@ class Deck {
     let randIdx = Math.floor(Math.random() * 52);
     return this.deck[randIdx];
   }
-
-
 }
 
 class Participant {
@@ -93,11 +91,6 @@ class Dealer extends Participant {
   reveal() {
     //STUB
   }
-
-  deal() {
-    //STUB
-    // does the dealer or the deck deal?
-  }
 }
 
 class TwentyOneGame {
@@ -108,7 +101,6 @@ class TwentyOneGame {
   }
 
   start() {
-    //SPIKE
     this.displayWelcomeMessage();
     this.dealCards();
     this.showCards();
