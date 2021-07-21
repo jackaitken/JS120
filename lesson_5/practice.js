@@ -1,41 +1,20 @@
-/*
-Given a string, split it into as few strings as possible such that each string is a palindrome.
-
-For example, given the input string racecarannakayak, return ["racecar", "anna", "kayak"].
-
-Given the input string abc, return ["a", "b", "c"].
-*/
-
-
-function fewestPalindromicSubstrs(str, arr) {
-  let startPtr = 0;
-  let endPtr = str.length;
-  let substr;
-
-  if (!str.length) return arr;
-
-  while(startPtr < endPtr) {
-    substr = str.slice(startPtr, endPtr);
-    if (isPalindrome(substr)) {
-      arr.push(substr);
-      break;
-    } else {
-      endPtr -= 1;
-    }
+class TreeNode {
+  constructor(data, left = null, right = null) {
+    this.data = data;
+    this.left = left;
+    this.right = right;
   }
-  str = removeSubstr(str, endPtr);
-  return fewestPalindromicSubstrs(str, arr);
 }
 
-function isPalindrome(str) {
-  return str.split('').reverse().join('') === str;
+class Tree {
+  constructor(root) {
+    this.root = root;
+  }
 }
 
-function removeSubstr(str, endIdx) {
-  return str.slice(endIdx);
-}
+let node1 = new TreeNode(10);
+let node2 = new TreeNode(20);
+let root = new TreeNode(15, node1, node2);
+let tree1 = new Tree(root);
 
-console.log(fewestPalindromicSubstrs('yoboyananayoboy', [])); // [ 'yobananaboy' ]
-console.log(fewestPalindromicSubstrs('racecarannakayak', [])); // [ 'racecar', 'anna', 'kayak' ]
-console.log(fewestPalindromicSubstrs('abc', [])); // ['a', 'b', 'c']
-console.log(fewestPalindromicSubstrs('jajajajajaja', [])); // ['a', 'b', 'c']
+console.log(tree1);
