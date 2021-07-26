@@ -1,51 +1,31 @@
-class TreeNode {
-  constructor(data, left = null, right = null) {
+class ListNode {
+  constructor(data, next = null) {
     this.data = data;
-    this.left = left;
-    this.right = right;
+    this.next = next;
   }
 }
 
-class Tree {
-  constructor(root) {
-    this.root = root;
+class LinkedList {
+  constructor(head) {
+    this.head = head;
   }
 
-  search(targetValue, node) {
-    if (node === null || targetValue === node.data) {
-      return node;
-    } else if (targetValue < node.data) {
-      return this.search(targetValue, node.left);
-    } else {
-      return this.search(targetValue, node.right);
-    }
-  }
+  read(index) {
+    currentNode = this.head;
+    currentIndex = 0;
 
-  insert(value, node) {
-    if (value < node.data) {
-      if (node.left === null) {
-        node.left = new TreeNode(value);
+    while (currentIndex < index) {
+      if (currentNode === null) {
+        return currentNode
       } else {
-        this.insert(value, node.left);
-      }
-    } else if (value > node.data) {
-      if (node.right === null) {
-        node.right = new TreeNode(value);
-      } else {
-        this.insert(value, node.right);
+        currentNode = currentNode.next;
+        currentIndex += 1;
       }
     }
   }
 }
 
-let node1 = new TreeNode(10);
-let node2 = new TreeNode(20);
-let root = new TreeNode(15, node1, node2);
-let tree1 = new Tree(root);
+let first_node = new ListNode(10);
+let list = new LinkedList(first_node);
 
-for (let i = 0; i < 1000; i ++) {
-  let randNum = Math.floor(Math.random() * 100);
-  tree1.insert(randNum, root);
-}
-
-console.log(tree1.search(32, root));
+console.log(list);

@@ -1,19 +1,17 @@
 class Card {
   constructor() {
-    //STUB
-    // What sort of state does a card need?
-    // Rank? Suit? Points?
+    this.deck = new Deck();
+  }
+
+  deal() {
+    let randIdx = Math.floor(Math.random() * 52);
+    return this.deck[randIdx];
   }
 }
 
 class Deck {
   constructor() {
     this.deck = this.fillDeck();
-    //STUB
-    // What sort of state does a deck need?
-    // 52 Cards?
-    // obviously, we need some data structure to keep track of cards
-    // array, object, something else?
   }
 
   fillDeck() {
@@ -35,23 +33,14 @@ class Deck {
     }
     return deck;
   }
-
-  deal() {
-    let randIdx = Math.floor(Math.random() * 52);
-    return this.deck[randIdx];
-  }
 }
 
 class Participant {
   constructor() {
-    //STUB
-    // What sort of state does a participant need?
-    // Score? Hand? Amount of money available?
-    // What else goes here? all the redundant behaviors from Player and Dealer?
   }
 
   hit() {
-    //STUB
+    
   }
 
   stay() {
@@ -69,19 +58,13 @@ class Participant {
 
 class Player extends Participant {
   constructor() {
-    //STUB
-    // What sort of state does a player need?
-    // Score? Hand? Amount of money available?
+    super();
   }
 }
 
 class Dealer extends Participant {
-  // Very similar to a Player; do we need this?
-
   constructor() {
-    //STUB
-    // What sort of state does a dealer need?
-    // Score? Hand? Deck of cards? Bow tie?
+    super();
   }
 
   hide() {
@@ -95,14 +78,12 @@ class Dealer extends Participant {
 
 class TwentyOneGame {
   constructor() {
-    //STUB
-    // What sort of state does the game need?
-    // A deck? Two participants?
+    this.player = new Player();
+    this.computer = new Dealer();
   }
 
   start() {
     this.displayWelcomeMessage();
-    this.dealCards();
     this.showCards();
     this.playerTurn();
     this.dealerTurn();
@@ -115,7 +96,7 @@ class TwentyOneGame {
   }
 
   showCards() {
-    //STUB
+    console.log();
   }
 
   playerTurn() {
@@ -139,8 +120,9 @@ class TwentyOneGame {
   }
 }
 
-let game = new TwentyOneGame();
-game.start();
+// let game = new TwentyOneGame();
+// game.start();
 
-let deck = new Deck();
-console.log(deck.deal());
+let player = new Player();
+let dealer = new Dealer();
+console.log(player.deck.deck === dealer.deck.deck);
