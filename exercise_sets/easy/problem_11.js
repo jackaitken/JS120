@@ -22,3 +22,4 @@ class Banner {
 
 let banner2 = new Banner('');
 banner2.displayBanner();
+console.log(Object.getPrototypeOf(Function.prototype));
