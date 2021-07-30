@@ -2,6 +2,9 @@ let person = {
   firstName: 'Rick ',
   lastName: 'Sanchez',
   fullName: this.firstName + this.lastName,
+  sayHello() {
+    console.log();
+  }
 };
 
 console.log(person.fullName); // NaN
