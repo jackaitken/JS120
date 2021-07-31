@@ -1,12 +1,22 @@
-function Olympian(name, event) {
+function Olympian(name, country) {
+  debugger;
   this.name = name;
-  this.event = event;
+  this.country = country;
 }
 
-Olympian.prototype.compete = function() {
-  return `${this.name} competes in ${this.event}`;
+Olympian.prototype.info = function() { // Creating a method called info
+  return `${this.name} competes in the Olympics`; 
 }
 
-let simone = new Olympian('Simone Biles', 'Gymnastics');
+function Gymnast(name, country) {
+  Olympian.call(this, name, country); // Reusing the Olympian constructor
+}
 
-simone instanceof Olympian; //true
+Gymnast.prototype = Object.create(Olympian.prototype); // Add Olympian to Gymnast's prototype chain
+Gymnast.prototype.constructor = Gymnast; // Reset the constructor of Gymnast
+
+Gymnast.prototype.info = function() { // Overwriting the info method
+  return `${this.name} is a Gymnast for the ${this.country}`; 
+}
+
+let simone = new Gymnast('Simone Biles', 'United States');
