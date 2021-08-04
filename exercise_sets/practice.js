@@ -100,18 +100,18 @@ property called `name` but cannot, and returns the value of `undefined`.
 
 
 //4
-function Dog(name) {
-  this.name = name;
-}
+// function Dog(name) {
+//   this.name = name;
+// }
 
-Dog.prototype.bark = function() {
-  console.log(`${this.name} says: Woof! Woof!`);
-};
+// Dog.prototype.bark = function() {
+//   console.log(`${this.name} says: Woof! Woof!`);
+// };
 
-let fido = new Dog('Fido');
-fido.bark(); // 'Fido says: Woof! Woof!!'
-console.log(fido instanceof Dog); // true
-//What if we remove `new`? How to make it work without `new`?
+// let fido = new Dog('Fido');
+// fido.bark(); // 'Fido says: Woof! Woof!!'
+// console.log(fido instanceof Dog); // true
+// //What if we remove `new`? How to make it work without `new`?
 
 /*
 This is an example of the constructor/prototype object creation pattern. It's also an
@@ -133,13 +133,13 @@ This is why `fido instanceof Dog` returns true.
 If we wanted to remove the `new` keyword to create a scope safe constructor function we could do this
 */
 
-function Dog(name) {
-  if (this instanceof Dog) {
-    this.name = name; 
-  } else {
-    return new Dog(name);
-  }
-}
+// function Dog(name) {
+//   if (this instanceof Dog) {
+//     this.name = name; 
+//   } else {
+//     return new Dog(name);
+//   }
+// }
 
 
 
@@ -161,6 +161,13 @@ Object.getPrototypeOf(dog); // {constructor: ƒ, walk: ƒ}
 Object.getPrototypeOf(dog) === Animal.prototype; // true
 Animal.prototype.hasOwnProperty('constructor'); // true
 typeof Animal.prototype.constructor; // "function"
+
+/*
+On line 158 a variable `dog` is declared in the global scope. The expression new Animal.prototype.constructor
+
+*/
+
+/*
 
 //6
 let obj = { a: "a" };
