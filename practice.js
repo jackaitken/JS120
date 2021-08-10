@@ -1,23 +1,29 @@
-class Node {
-  constructor(data, leftChild = null, rightChild = null) {
-    this.data = data;
-    this.leftChild = leftChild;
-    this.rightChild = rightChild;
+// Mix-ins
+
+let WaterDrivable = {
+  driveOnWater() {
+    console.log('Driving on Water');
   }
 }
 
-class BinarySearchTree {
-  constructor() {
-    this.root = null;
-  }
-
-  insert(data) {
-    let node = new Node(data);
-    if (this.root === null) {
-      this.root === data;
-    } else if ()
+class Plane {
+  fly() {
+    console.log('Flying');
   }
 }
 
-let node1 = new Node(15);
-console.log(node1);
+class Jet extends Plane {}
+
+class Boat {
+  driveOnWater() {
+    console.log('Driving on Water');
+  }
+}
+
+class MotorBoat extends Boat {}
+
+class SeaPlane extends Plane {}
+Object.assign(SeaPlane.prototype, WaterDrivable);
+
+let plane = new SeaPlane();
+plane.driveOnWater();
