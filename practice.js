@@ -29,6 +29,20 @@ Memory Dump
 NOTES 
 - property sequence lookup and prototype chain are interelated 
 
+copying method out of object
+passing object as a function
+nested functions
+
+
+`new`
+
+1. creates an empty object
+2. sets the [[Protoype]] property of the object to the object referenced 
+   by the constructors prototype property
+3. sets the object as the value of this inside the constructor function
+4. invokes the function
+5. returns the value of this unless the constructor explicitly returns another object
+   
 */
 
 
@@ -67,8 +81,9 @@ class MotorBoat {}
 Object.assign(MotorBoat.prototype, WaterDriveable);
 */
 
-// Polymorphism
+// Polymorphism through Duck-typing
 
+/*
 class Wrench {
   info() {
     console.log("I'm a wrench!");
@@ -90,3 +105,135 @@ class Person {
 [new Wrench(), new Tree(), new Person()].forEach(obj => {
   obj.info();
 });
+
+*/
+// Polymorphism through inheritance
+
+/*
+class Animal {
+  makeSound() {
+    console.log('Animal Sound');
+  }
+}
+
+class Cow extends Animal {
+  makeSound() {
+    console.log('Moo');
+  }
+}
+
+class Dog extends Animal {
+  makeSound() {
+    console.log('Woof');
+  }
+}
+
+class Cat extends Animal {
+  makeSound() {
+    console.log('Meow');
+  }
+}
+
+class Fish extends Animal {}
+
+[new Cow(), new Dog(), new Cat(), new Fish()].forEach(obj => {
+  obj.makeSound();
+});
+*/
+
+// constructor prototype
+
+/*
+
+function Animal(type) {
+  this.type = type;
+}
+
+function Dog(name) {
+  Animal.call(this, 'Dog');
+  this.name = name;
+}
+
+Dog.prototype = Object.create(Animal.prototype);
+Dog.prototype.constructor = Dog;
+
+let dog1 = new Dog('Arlo');
+console.log(Object.getPrototypeOf(dog1) === Dog.prototype);
+console.log(Object.getPrototypeOf(Dog.prototype) === Animal.prototype);
+
+*/
+
+// ES6 Classes
+
+/*
+class Animal{
+  constructor(type) {
+    this.type = type;
+  }
+}
+
+class Dog extends Animal {
+  constructor(name) {
+    super('Dog');
+    this.name = name;
+  }
+}
+
+let dog1 = new Dog('Arlo');
+console.log(dog1);
+
+*/
+
+// OLOO
+
+/*
+let dogPrototype = {
+  init(name) {
+    this.name = name;
+    return this;
+  },
+
+  makeNoise() {
+    console.log('Woof');
+  }
+}
+
+let dog = Object.create(dogPrototype).init('Arlo');
+console.log(dog);
+dog.makeNoise();
+*/
+
+// Factory Function
+
+/*
+
+function createPerson(name, age) {
+  return {
+    name,
+    age,
+  
+    sayHi() {
+      console.log(`${this.name} says Hi!`);
+    }
+  }
+}
+
+let person1 = createPerson('Jack', 28);
+console.log(person1);
+*/
+
+class Vehicle {
+  constructor(year) {
+    this.year = year;
+  }
+}
+
+class Truck extends Vehicle {
+  
+}
+
+let truck = new Truck(2003);
+console.log(truck.year); // 2003
+
+let car = new Car(2015);
+console.log(car.year); // 2015
